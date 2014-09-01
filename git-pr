@@ -1,0 +1,18 @@
+#!/bin/sh
+ 
+if [ $# -ne 3 ]; then
+  echo "Usage: ghe-pr <remote_name> <base_branch> <head_branch>";
+  exit;
+fi
+ 
+ 
+REMOTE=$1
+BASE=$2
+HEAD=$3
+GHE_URL="https://github.com"
+ 
+REMOTE_URL=`git config --get remote.${REMOTE}.url`
+DIR=`echo "/$REMOTE_URL" | cut -f2 -d: | cut -f1 -d.`
+echo ""
+echo " URL: $GHE_URL$DIR/compare/$BASE...$HEAD?expand=1"
+echo ""
