@@ -9,10 +9,14 @@ fi
 REMOTE=$1
 BASE=$2
 HEAD=$3
-GHE_URL="https://github.com"
- 
+ROOT_URL="https://github.com" # for GHE ROOTURL
 REMOTE_URL=`git config --get remote.${REMOTE}.url`
-DIR=`echo "/$REMOTE_URL" | cut -f2 -d: | cut -f1 -d.`
+
+if [ `echo $REMOTE_URL | grep 'github.com'` ]; then
+ ROOT_URL="https://github.com";
+fi
+
+DIR=`echo "$REMOTE_URL" | cut -f2 -d: | cut -f1 -d.`
 echo ""
-echo " URL: $GHE_URL$DIR/compare/$BASE...$HEAD?expand=1"
+echo " URL: $ROOT_URL/$DIR/compare/$BASE...$HEAD?expand=1"
 echo ""
